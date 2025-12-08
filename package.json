@@ -6,7 +6,7 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "start": "ts-node sltns/solve1.ts"
+    "start": "ts-node sltns/solve2.ts"
   },
   "devDependencies": {
     "@types/node": "^24.10.1"
