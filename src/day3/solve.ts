@@ -4,12 +4,12 @@ let best = "";
 let cumulativeBest = 0
 
 export function solve() {
-    const filePath = path.join(__dirname, 'test.txt');
+    const filePath = path.join(__dirname, 'input.txt');
     const data = fs.readFileSync(filePath, 'utf-8');
     const banks = data.split(/\r?\n/); 
     
     banks.forEach(bank => {
-        const digits = findMaxNDigits(bank, 2);
+        const digits = findMaxNDigits(bank, 12);
         best = digits.join('');
         console.log(best);
         cumulativeBest += parseInt(best);

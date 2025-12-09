@@ -3,13 +3,22 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 export function solve() {
-    const filePath = path.join(__dirname, 'test.txt');
+    const filePath = path.join(__dirname, 'input.txt');
     const data = fs.readFileSync(filePath, 'utf-8');
-    const matrix = data.split("\n").map(line => line.split(""));
-    const counts = createMatrix(matrix);
-    fillCountsMatrix(counts, matrix);
-    console.log(counts);
-    const res = countLessThan4(counts);
+    let matrix = data.split("\n").map(line => line.split(""));
+    let lessThan4Count = -1
+    let grandSumlessThan4 = 0;
+    
+    do {
+        const counts = createMatrix(matrix);
+        fillCountsMatrix(counts, matrix);
+        lessThan4Count = countLessThan4(counts);
+        grandSumlessThan4 += lessThan4Count;
+        console.log("Remove: ", lessThan4Count);
+        removeRolls(counts, matrix);
+    } while (lessThan4Count > 0)
+    
+    console.log("Grand total less than 4:", grandSumlessThan4);
 }
 
 solve();
@@ -47,6 +56,20 @@ function fillCountsMatrix(counts: string[][], matrix: string[][]) {
                     }
                 }
                 counts[i][j] = count.toString();
+            }
+        }
+    }
+}
+
+function removeRolls(counts: string[][], matrix: string[][]) {
+    const y = counts.length;
+    const x = counts[0].length;
+
+    for (let i = 0; i < y; i++) {
+        for (let j = 0; j < x; j++) {
+            const val = parseInt(counts[i][j]);
+            if (!isNaN(val) && val < 4) {
+                matrix[i][j] = '.';
             }
         }
     }

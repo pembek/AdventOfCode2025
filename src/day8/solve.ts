@@ -1,3 +1,11 @@
+import * as fs from 'fs';
+import * as path from 'path';
+
 export function solve() {
-    // TODO: implement solution for day 08
+    const filePath = path.join(__dirname, 'test.txt');
+    const data = fs.readFileSync(filePath, 'utf-8');
+
+    console.log(data);
 }
+
+solve();
